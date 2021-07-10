@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run: echo "hello Nicole!" > output.txt
       - persist_to_workspace:
-          root: /tmp/dir
+          root: ~/
           paths:
             - output.txt
   printb:
@@ -20,9 +20,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "You are doing well!" | cat output.txt
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/
+      - run: echo "You are doing well!" | cat output.txt 
 
 # Orchestrate our job run sequence
 workflows:
