@@ -5,7 +5,7 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 jobs:
-  print_a:
+  printa:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -15,7 +15,7 @@ jobs:
           root: ~/
           paths:
             - nicole.txt
-  print_b:
+  printb:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -26,9 +26,9 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  print_a and print_b:
+  my_workflow:
     jobs:
-      - print_a
-      - print_b:
+      - printa
+      - printb:
           requires:
-            - print_a
+            - printa
