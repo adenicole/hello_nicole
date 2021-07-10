@@ -15,16 +15,14 @@ jobs:
           root: ~/
           paths:
             - nicole.txt
+
   printb:
     docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
+      - image: circleci/node
       - attach_workspace:
           at: ~/
       - run: cat ~/nicole.txt
 
-# Orchestrate our job run sequence
 workflows:
   my_workflow:
     jobs:
