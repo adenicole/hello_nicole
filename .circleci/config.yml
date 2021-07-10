@@ -10,13 +10,19 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "this is the build job"
+      - run: echo "hello nicole!" > ~/nicole.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - nicole.txt
   print_b:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run: echo "this is the test job"
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/nicole.txt
 
 # Orchestrate our job run sequence
 workflows:
