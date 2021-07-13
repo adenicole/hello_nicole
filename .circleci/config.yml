@@ -5,28 +5,28 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 jobs:
-  printa:
+  save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "hello nicole" > ~/nicole.txt
+      - run: echo "hello world" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
             - output.txt
 
-  printb:
+  print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~/
-      - run: cat ~/nicole.txt
+      - run: cat ~/output.txt
 
 workflows:
   my_workflow:
     jobs:
-      - printa
-      - printb:
+      - save_hello_world_output
+      - print_output_file:
           requires:
-            - printa
+            - save_hello_world_output
