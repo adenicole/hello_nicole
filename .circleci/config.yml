@@ -23,7 +23,7 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
 
-  create_infrastructure:
+  Create_infrastructure:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -42,4 +42,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
-      - create_infrastructure
+      - Create_infrastructure
