@@ -23,6 +23,18 @@ jobs:
           at: ~/
       - run: cat ~/output.txt
 
+  create_infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Backend Infrastructure
+          command: |
+            aws cloudformation deploy \
+              --template-file template.yml \
+              --stack-name my-stack
+
 workflows:
   my_workflow:
     jobs:
@@ -30,3 +42,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - create_infrastructure
